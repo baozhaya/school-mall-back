@@ -20,9 +20,9 @@ public class UserService {
      * @param pageSize
      * @return
      */
-    public PageInfo<User> selectPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<User> selectPage(Integer pageNum, Integer pageSize, String name) {
         PageHelper.startPage(pageNum, pageSize);
-        List<User> list =userMapper.selectAll();
+        List<User> list =userMapper.selectAll(name);
         return PageInfo.of(list);
     }
 

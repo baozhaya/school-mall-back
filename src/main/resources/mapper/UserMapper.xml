@@ -7,7 +7,10 @@
 
     <select id="selectAll" resultType="com.example.entity.User">
     select * from`user`
-
+<where>
+    <if test="name!= null">name like concat('%',#{name},'%')
+    </if>
+</where>
     </select>
 
 </mapper>

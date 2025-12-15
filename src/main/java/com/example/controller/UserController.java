@@ -30,8 +30,9 @@ public class UserController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize){
-       PageInfo<User> pageInfo =userService.selectPage(pageNum,pageSize);
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             @RequestParam(required = false) String name){
+       PageInfo<User> pageInfo =userService.selectPage(pageNum,pageSize,name);
        return Result.success(pageInfo);
     }
 }
