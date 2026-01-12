@@ -2,13 +2,13 @@ package com.example.entity;
 
 import java.math.BigDecimal;
 
-public class User {
+public class User extends Account {
     private Integer id;
-    private String name;
+    private String username;
     private String password;
+    private String name;
     private String role;
     private BigDecimal account;
-    private String username;
     private String avatar;
 
     public Integer getId() {
@@ -43,7 +43,7 @@ public class User {
         this.role = role;
     }
 
-    public BigDecimal getAccount() {
+    public BigDecimal getAccount(BigDecimal zero) {
         return account;
     }
 
@@ -66,6 +66,6 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }
+
+

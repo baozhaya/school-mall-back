@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,8 @@ public class WebController {
 
     @Resource
     private AdminService adminService;
-
+    @Resource
+    private UserService userService;
 
     /**
      * 默认请求接口
@@ -28,8 +30,14 @@ public class WebController {
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
         Account ac = null;
-        if ("ADMIN".equals(account.getRole())) {
+        if ("管理员".equals(account.getRole())) {
             ac = adminService.login(account);
+        }
+        if ("普通用户".equals(account.getRole())) {
+            ac = userService.login(account);
+        }
+        if(ac == null) {
+            return Result.error("登陆失败，用户不存在");
         }
         return Result.success(ac);
     }

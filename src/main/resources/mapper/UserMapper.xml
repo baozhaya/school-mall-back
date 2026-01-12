@@ -6,11 +6,32 @@
 <mapper namespace="com.example.mapper.UserMapper">
 
     <select id="selectAll" resultType="com.example.entity.User">
-    select * from`user`
+    select * from  user
 <where>
     <if test="name!= null">name like concat('%',#{name},'%')
     </if>
+    <if test="account!= null">AND account = #{account}
+    </if>
+
 </where>
+        order by id  desc
     </select>
+
+    <select id="selectByUsername" resultType="com.example.entity.User">
+        select * from user where username = #{username }
+    </select>
+    <delete id="deleteById">
+        delete  from user where id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.example.entity.User">
+insert into user (username, passsword, name, avatar, role, account)
+values(#{username},#{password},#{name},#{account},#{avater},#{role})
+    </insert>
+
+    <update id="updateById">
+
+        update 'user' set username=#{username}, passsword=#{password}, name=#{name},avatar=#{avater},role=#{role},account=#{account}
+        where id =#{id}
+    </update>
 
 </mapper>

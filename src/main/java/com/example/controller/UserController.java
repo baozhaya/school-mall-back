@@ -7,10 +7,9 @@ import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/user")
@@ -31,8 +30,43 @@ public class UserController {
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize,
-                             @RequestParam(required = false) String name){
-       PageInfo<User> pageInfo =userService.selectPage(pageNum,pageSize,name);
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) BigDecimal account){
+       PageInfo<User> pageInfo =userService.selectPage(pageNum,pageSize,name,account);
        return Result.success(pageInfo);
     }
+
+    /**
+     * 删除数据
+     * 接口路径：user/delete/1
+     * @return
+     */
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable Integer id){
+        userService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
+     * 新增数据
+     * @param user 参数的对象
+     * @return
+     */
+
+    @PostMapping("/add")
+    public Result add(@RequestBody User user){
+        userService.add(user);
+        return Result.success();
+
+    }
+
+    /**
+     * 更新数据
+     * @param user 参数的对象 编辑后的数据
+     */
+    @PutMapping("/uodate")
+public Result uodate(@RequestBody User user){
+        userService.update(user);
+        return Result.success();
+}
 }

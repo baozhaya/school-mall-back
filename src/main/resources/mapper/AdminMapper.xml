@@ -17,7 +17,7 @@
     </select>
 
     <delete id="deleteById">
-        delete from `admin` where id = #{id}
+        delete from admin where id = #{id}
     </delete>
 
     <insert id="insert" parameterType="com.example.entity.Admin" useGeneratedKeys="true">
