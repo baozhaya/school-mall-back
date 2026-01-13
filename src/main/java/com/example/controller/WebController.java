@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.Account;
+import com.example.entity.User;
 import com.example.service.AdminService;
 import com.example.service.UserService;
 import jakarta.annotation.Resource;
@@ -46,7 +47,11 @@ public class WebController {
      * 注册
      */
     @PostMapping("/register")
-    public Result register() {
+    public Result register(@RequestBody User user) {
+        if(!user.getPassword().equals(user.getPassword())) {
+            return Result.error(" 密码不一致");
+        }
+        userService.add(user);
         return Result.success();
     }
 
@@ -55,8 +60,11 @@ public class WebController {
      */
     @PutMapping("/updatePassword")
     public Result updatePassword(@RequestBody Account account) {
-        if ("ADMIN".equals(account.getRole())) {
+        if ("管理员".equals(account.getRole())) {
             adminService.updatePassword(account);
+        }
+        if ("普通用户".equals(account.getRole())) {
+            userService.updatePassword(account);
         }
         return Result.success();
     }
