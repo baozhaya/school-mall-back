@@ -43,7 +43,7 @@ public class User extends Account {
         this.role = role;
     }
 
-    public BigDecimal getAccount(BigDecimal zero) {
+    public BigDecimal getAccount() {
         return account;
     }
 
