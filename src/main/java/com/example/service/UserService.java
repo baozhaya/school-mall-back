@@ -20,6 +20,10 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
+    public List<User> selectByAll(String name) {
+        return userMapper.selectAll(name);
+    }
+
     /**
      * 分页查询的方法
      * @param pageNum
@@ -87,4 +91,5 @@ public class UserService {
         dbuser.setPassword(account.getNewPassword());
         userMapper.updateById(dbuser);
     }
+
 }

@@ -51,7 +51,7 @@
         public void updateById(Goods goods) {
 
             goodsMapper.updateById(goods);
-            if(goods.getStatus().equals("下架")){
+            if("下架".equals(goods.getStatus())){
                 //删除购物车的对应商品
                 cartMapper.deleteByGoodsId(goods.getId());
             }
